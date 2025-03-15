@@ -1,0 +1,5 @@
+# Ignore node_modules
+fe/node_modules/
+
+# Ignore .idea (JetBrains IDE files)
+fe/.idea/
