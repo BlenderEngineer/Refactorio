@@ -1,17 +1,53 @@
 <?php
 
-// $ composer require react/http react/socket # install example using Composer
-// $ php example.php # run example on command line, requires no additional web server
-
 require __DIR__ . '/vendor/autoload.php';
 
-$http = new React\Http\HttpServer(function (Psr\Http\Message\ServerRequestInterface $request) {
-    return React\Http\Message\Response::plaintext(
-        "Hello World!\n"
-    );
+use Psr\Http\Message\ServerRequestInterface;
+use React\Http\HttpServer;
+use React\Http\Message\Response;
+use React\Socket\SocketServer;
+
+// Directory to the static vite build output
+$publicDir = realpath(__DIR__ . '/../fe/dist');
+
+$http = new HttpServer(function (ServerRequestInterface $request) use ($publicDir) {
+    $path = $request->getUri()->getPath();
+
+    if ($path === '/') {
+        $path = '/index.html';
+    }
+
+    // Gets the full path to the requested file
+    $file = realpath($publicDir . $path);
+
+    // Checks if file exists and is in the correct directory
+    if ($file !== false && strpos($file, $publicDir) === 0 && file_exists($file)) {
+        $mimeType = 'text/plain';
+        if (preg_match('/\.html$/i', $file)) {
+            $mimeType = 'text/html';
+        } elseif (preg_match('/\.css$/i', $file)) {
+            $mimeType = 'text/css';
+        } elseif (preg_match('/\.js$/i', $file)) {
+            $mimeType = 'application/javascript';
+        } elseif (preg_match('/\.svg$/i', $file)) {
+            $mimeType = 'image/svg+xml';
+        }
+
+        return new Response(
+            200,
+            ['Content-Type' => $mimeType],
+            file_get_contents($file)
+        );
+    } else {
+        return new Response(
+            404,
+            ['Content-Type' => 'text/plain'],
+            '404 Not Found'
+        );
+    }
 });
 
-$socket = new React\Socket\SocketServer('127.0.0.1:8080');
+$socket = new SocketServer('127.0.0.1:8080');
 $http->listen($socket);
 
 echo "Server running at http://127.0.0.1:8080" . PHP_EOL;
