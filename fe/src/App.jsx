@@ -37,6 +37,29 @@ function App() {
         setValidationMessage('Code is valid!');
         return true;
     };
+    const codeScoreGenerate  = async () => {
+        if (!code.trim()) {
+            setValidationMessage('Code cannot be empty!');
+            return false;
+        }
+        try {
+            const response = await axios.post('/api/codeScore', { code });
+
+            // Check if there is no response or no data in the response
+            if (!response || !response.data) {
+                throw new Error('No response from the server');
+            }
+
+            setAnalysisResult(response.data.result);
+            setValidationMessage('Analysis complete!');
+        } catch (error) {
+            console.error('Analysis error:', error);
+            setValidationMessage(error.message || 'Analysis failed. Please try again.');
+        } finally {
+            setIsLoading(false);
+        }
+        return true;
+    };
 
     // Send code to backend for analysis
     const handleAnalyze = async () => {
@@ -117,11 +140,20 @@ function App() {
             <div className="sidebar">
                 <h2>Extra Tools</h2>
                 <div className="sidebar-container">
-                    <button>Kodo kokybės įvertinimas</button>
+                    <button onClick={codeScoreGenerate} >Kodo kokybės įvertinimas</button>
                     <button>Dummy1</button>
                     <button>Dummy2</button>
                 </div>
             </div>
+
+                <dialog open={validationMessage!=""}>
+                    <p>{validationMessage}</p>
+                    <form method="dialog">
+                        <button onClick={() => setValidationMessage("")}>OK</button>
+
+                    </form>
+                </dialog>
+
         </div>
     );
 }
