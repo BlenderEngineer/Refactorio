@@ -3,3 +3,4 @@ fe/node_modules/
 
 # Ignore .idea (JetBrains IDE files)
 fe/.idea/
+.idea/

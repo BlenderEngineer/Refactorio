@@ -62,56 +62,66 @@ function App() {
     };
 
     return (
-        <div className="app-container">
-            <h1>Refactorio - Code Improvement Assistant</h1>
+        <div className="app-container-wrapper">
+            <div className="app-container">
+                <h1>Refactorio - Code Improvement Assistant</h1>
 
-            <div className="input-section">
-                <div className="code-input">
+                <div className="input-section">
+                    <div className="code-input">
           <textarea
               value={code}
               onChange={handleCodeChange}
               placeholder="Paste your code here..."
               rows={15}
           />
-                </div>
+                    </div>
 
-                <div className="upload-section">
-                    <div className="file-upload">
-                        <input
-                            type="file"
-                            accept=".txt,.js"
-                            onChange={handleFileUpload}
-                            id="fileInput"
-                        />
-                        <label htmlFor="fileInput">
-                            {fileName || 'Choose a file'}
-                        </label>
+                    <div className="upload-section">
+                        <div className="file-upload">
+                            <input
+                                type="file"
+                                accept=".txt,.js"
+                                onChange={handleFileUpload}
+                                id="fileInput"
+                            />
+                            <label htmlFor="fileInput">
+                                {fileName || 'Choose a file'}
+                            </label>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div className="validation-message">
-                {validationMessage}
-            </div>
-
-            <div className="action-buttons">
-                <button onClick={validateCode}>
-                    Validate Code
-                </button>
-                <button
-                    onClick={handleAnalyze}
-                    disabled={isLoading || !code}
-                >
-                    {isLoading ? 'Analyzing...' : 'Analyze Code'}
-                </button>
-            </div>
-
-            {analysisResult && (
-                <div className="result-section">
-                    <h2>Analysis Results</h2>
-                    <pre>{analysisResult}</pre>
+                <div className="validation-message">
+                    {validationMessage}
                 </div>
-            )}
+
+                <div className="action-buttons">
+                    <button onClick={validateCode}>
+                        Validate Code
+                    </button>
+                    <button
+                        onClick={handleAnalyze}
+                        disabled={isLoading || !code}
+                    >
+                        {isLoading ? 'Analyzing...' : 'Analyze Code'}
+                    </button>
+                </div>
+
+                {analysisResult && (
+                    <div className="result-section">
+                        <h2>Analysis Results</h2>
+                        <pre>{analysisResult}</pre>
+                    </div>
+                )}
+            </div>
+            <div className="sidebar">
+                <h2>Extra Tools</h2>
+                <div className="sidebar-container">
+                    <button>Kodo kokybės įvertinimas</button>
+                    <button>Dummy1</button>
+                    <button>Dummy2</button>
+                </div>
+            </div>
         </div>
     );
 }
