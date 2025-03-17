@@ -12,7 +12,27 @@ $publicDir = realpath(__DIR__ . '/../fe/dist');
 
 $http = new HttpServer(function (ServerRequestInterface $request) use ($publicDir) {
     $path = $request->getUri()->getPath();
+    if (strpos($path, '/api/') === 0) {
+        if ($path === '/api/analyze'){
+            $body = (string)$request->getBody();
+            $data = json_decode($body, true);
 
+            if(!isset($data['code'])){
+                $result = 'Could not receive analysis';
+                return new Response(
+                    404,
+                    ['Content-Type' => 'application/json'],
+                    json_encode(['result' => $result])
+                );
+            }
+            $result = 'code has been received';
+            return new Response(
+                200,
+                ['Content-Type' => 'application/json'],
+                json_encode(['result' => $result])
+            );
+        }
+    }
     if ($path === '/') {
         $path = '/index.html';
     }
