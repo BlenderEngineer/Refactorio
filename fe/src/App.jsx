@@ -7,6 +7,7 @@ function App() {
     const [fileName, setFileName] = useState('');
     const [validationMessage, setValidationMessage] = useState('');
     const [analysisResult, setAnalysisResult] = useState('');
+    const [codeScore, setcodeScore] = useState('');
     const [isLoading, setIsLoading] = useState(false);
 
     // Handle text input change
@@ -43,20 +44,19 @@ function App() {
             return false;
         }
         try {
-            const response = await axios.post('/api/codeScore', { code });
+            const response = await axios.post('http://127.0.0.1:8080/api/codeScore', { code });
 
             // Check if there is no response or no data in the response
             if (!response || !response.data) {
                 throw new Error('No response from the server');
             }
-
-            setAnalysisResult(response.data.result);
-            setValidationMessage('Analysis complete!');
+            
+            setcodeScore(response.data.result);
         } catch (error) {
-            console.error('Analysis error:', error);
-            setValidationMessage(error.message || 'Analysis failed. Please try again.');
+            console.error('Error:', error);
+            setcodeScore(error.message || 'Something went wrong. Please try again.');
         } finally {
-            setIsLoading(false);
+            //setIsLoading(false);
         }
         return true;
     };
@@ -67,7 +67,7 @@ function App() {
 
         setIsLoading(true);
         try {
-            const response = await axios.post('/api/analyze', { code });
+            const response = await axios.post('http://127.0.0.1:8080/api/analyze', { code });
 
             // Check if there is no response or no data in the response
             if (!response || !response.data) {
@@ -146,10 +146,10 @@ function App() {
                 </div>
             </div>
 
-                <dialog open={validationMessage!=""}>
-                    <p>{validationMessage}</p>
+                <dialog open={codeScore!=""}>
+                    <p>{codeScore}</p>
                     <form method="dialog">
-                        <button onClick={() => setValidationMessage("")}>OK</button>
+                        <button onClick={() => setcodeScore("")}>OK</button>
 
                     </form>
                 </dialog>

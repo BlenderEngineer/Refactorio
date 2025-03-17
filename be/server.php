@@ -12,8 +12,15 @@ $publicDir = realpath(__DIR__ . '/../fe/dist');
 
 $http = new HttpServer(function (ServerRequestInterface $request) use ($publicDir) {
     $path = $request->getUri()->getPath();
-
-    if ($path === '/') {
+	
+	if ($path === '/api/codeScore'){
+		return new Response(
+            200,
+            ['Content-Type' => 'application/json'],
+            json_encode(['result' => 5])
+        );
+	}
+    elseif ($path === '/') {
         $path = '/index.html';
     }
 
