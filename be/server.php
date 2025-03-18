@@ -10,16 +10,30 @@ use React\Socket\SocketServer;
 // Directory to the static vite build output
 $publicDir = realpath(__DIR__ . '/../fe/dist');
 
+function getAIScore($userCode) {
+    /*$command = "echo 'Give me a single-digit code score' | ollama run deepseek-r1";*/
+	//$userCode = "i forgot";
+	$command = "echo \"Respond only(user will only see the number between those tags, so dont give any explanation so your response would run faster) with code quality(0-10), acceptable answer: <codeScore>0</codeScore> now I'm giving you user message: $userCode\" | ollama run deepseek-r1";
+	echo $command;
+    $output = shell_exec($command);
+    echo $output;
+    preg_match('/<codeScore>(.|\n)*?<\/codeScore>/', $output, $matches);
+    return $matches[1] ?? 0;
+}
+
 $http = new HttpServer(function (ServerRequestInterface $request) use ($publicDir) {
     $path = $request->getUri()->getPath();
 	
 	if ($path === '/api/codeScore'){
-		return new Response(
+		$data = json_decode($request->getBody()->getContents(), true);
+        $userCode = $data['code'] ?? '';
+        $score = getAIScore($userCode);
+        return new Response(
             200,
             ['Content-Type' => 'application/json'],
-            json_encode(['result' => '5.4'])
+            json_encode(['result' => $score])
         );
-	}
+    }
     elseif ($path === '/') {
         $path = '/index.html';
     }

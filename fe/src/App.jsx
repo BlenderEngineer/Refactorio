@@ -50,7 +50,7 @@ function App() {
             if (!response || !response.data) {
                 throw new Error('No response from the server');
             }
-            
+            console.log(response.data);
             setcodeScore(response.data.result);
         } catch (error) {
             console.error('Error:', error);
@@ -140,7 +140,7 @@ function App() {
             <div className="sidebar">
                 <h2>Extra Tools</h2>
                 <div className="sidebar-container">
-                    <button onClick={codeScoreGenerate} >Kodo kokybės įvertinimas</button>
+                    <button onClick={codeScoreGenerate} >Kodo kokybės įvertinimas(0-10)</button>
                     <button>Dummy1</button>
                     <button>Dummy2</button>
                 </div>
