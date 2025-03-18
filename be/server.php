@@ -17,7 +17,7 @@ $http = new HttpServer(function (ServerRequestInterface $request) use ($publicDi
 		return new Response(
             200,
             ['Content-Type' => 'application/json'],
-            json_encode(['result' => 5])
+            json_encode(['result' => '5.4'])
         );
 	}
     elseif ($path === '/') {
