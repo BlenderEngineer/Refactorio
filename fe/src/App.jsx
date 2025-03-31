@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import './App.css';
+import {deserializeLineColors} from "./utils/deserializeLineColors.js";
 
 function App() {
     const [code, setCode] = useState('');
@@ -74,11 +75,7 @@ function App() {
                 throw new Error('No response from the server');
             }
             console.log(response.data);
-            const ranges = response.data.result.map(range => {
-                const [lineRange, color] = range.split(',');
-                const [start, end] = lineRange.split('-').map(Number);
-                return { start, end: end || start, color };
-            });
+            const ranges = deserializeLineColors(response.data.result);
             console.log(ranges);
             setColorRanges(ranges);
         } catch (error) {
