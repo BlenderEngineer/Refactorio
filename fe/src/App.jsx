@@ -61,6 +61,29 @@ function App() {
         return true;
     };
 
+    const codeLinesQualityEvaluate  = async () => {
+        if (!code.trim()) {
+            setValidationMessage('Code cannot be empty!');
+            return false;
+        }
+        try {
+            const response = await axios.post('http://127.0.0.1:8080/api/codeLinesQuality', { code });
+
+            // Check if there is no response or no data in the response
+            if (!response || !response.data) {
+                throw new Error('No response from the server');
+            }
+            console.log(response.data);
+            setcodeScore(response.data.result);
+        } catch (error) {
+            console.error('Error:', error);
+            setcodeScore(error.message || 'Something went wrong. Please try again.');
+        } finally {
+            //setIsLoading(false);
+        }
+        return true;
+    };
+
     // Send code to backend for analysis
     const handleAnalyze = async () => {
         if (!validateCode()) return;
@@ -141,12 +164,11 @@ function App() {
                 <h2>Extra Tools</h2>
                 <div className="sidebar-container">
                     <button onClick={codeScoreGenerate} >Kodo kokybės įvertinimas(0-10)</button>
-                    <button>Dummy1</button>
-                    <button>Dummy2</button>
+                    <button onClick={codeLinesQualityEvaluate}>Kodo eilučių kokybė</button>
                 </div>
             </div>
 
-                <dialog open={codeScore!=""}>
+            <dialog open={codeScore!=""}>
                     <p>{codeScore}</p>
                     <form method="dialog">
                         <button onClick={() => setcodeScore("")}>OK</button>

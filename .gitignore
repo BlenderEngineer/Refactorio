@@ -4,3 +4,6 @@ fe/node_modules/
 # Ignore .idea (JetBrains IDE files)
 fe/.idea/
 .idea/
+
+# Ignore dist folder for frontend
+fe/dist/
