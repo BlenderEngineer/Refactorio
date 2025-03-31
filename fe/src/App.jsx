@@ -8,6 +8,7 @@ function App() {
     const [validationMessage, setValidationMessage] = useState('');
     const [analysisResult, setAnalysisResult] = useState('');
     const [codeScore, setcodeScore] = useState('');
+    const [colorRanges, setColorRanges] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
 
     // Handle text input change
@@ -69,12 +70,17 @@ function App() {
         try {
             const response = await axios.post('http://127.0.0.1:8080/api/codeLinesQuality', { code });
 
-            // Check if there is no response or no data in the response
             if (!response || !response.data) {
                 throw new Error('No response from the server');
             }
             console.log(response.data);
-            setcodeScore(response.data.result);
+            const ranges = response.data.result.map(range => {
+                const [lineRange, color] = range.split(',');
+                const [start, end] = lineRange.split('-').map(Number);
+                return { start, end: end || start, color };
+            });
+            console.log(ranges);
+            setColorRanges(ranges);
         } catch (error) {
             console.error('Error:', error);
             setcodeScore(error.message || 'Something went wrong. Please try again.');
@@ -84,13 +90,42 @@ function App() {
         return true;
     };
 
+    function coloredCodeLinesViewer() {
+        const lines = (code.split('\n'));
+
+        const getColorForLine = (lineIndex) => {
+            for (let range of colorRanges) {
+                if (lineIndex >= range.start - 1 && lineIndex <= range.end - 1) {
+                    return range.color;
+                }
+            }
+            return null;
+        };
+
+        return (
+            <div>
+                {lines.map((line, index) => {
+                    const lineColor = getColorForLine(index);
+                    return (
+                        <div
+                            key={index}
+                            style={{minHeight: '1em',backgroundColor: lineColor ? lineColor : 'transparent'}}
+                        >
+                            {line}
+                        </div>
+                    );
+                })}
+            </div>
+        );
+    }
+
     // Send code to backend for analysis
     const handleAnalyze = async () => {
         if (!validateCode()) return;
 
         setIsLoading(true);
         try {
-            const response = await axios.post('http://127.0.0.1:8080/api/analyze', { code });
+            const response = await axios.post('http://127.0.0.1:8080/api/analyze', {code});
 
             // Check if there is no response or no data in the response
             if (!response || !response.data) {
@@ -114,12 +149,12 @@ function App() {
 
                 <div className="input-section">
                     <div className="code-input">
-          <textarea
-              value={code}
-              onChange={handleCodeChange}
-              placeholder="Paste your code here..."
-              rows={15}
-          />
+                        <textarea
+                            value={code}
+                            onChange={handleCodeChange}
+                            placeholder="Paste your code here..."
+                            rows={15}
+                        />
                     </div>
 
                     <div className="upload-section">
@@ -163,18 +198,23 @@ function App() {
             <div className="sidebar">
                 <h2>Extra Tools</h2>
                 <div className="sidebar-container">
-                    <button onClick={codeScoreGenerate} >Kodo kokybės įvertinimas(0-10)</button>
+                    <button onClick={codeScoreGenerate}>Kodo kokybės įvertinimas(0-10)</button>
                     <button onClick={codeLinesQualityEvaluate}>Kodo eilučių kokybė</button>
                 </div>
             </div>
 
-            <dialog open={codeScore!=""}>
-                    <p>{codeScore}</p>
-                    <form method="dialog">
-                        <button onClick={() => setcodeScore("")}>OK</button>
-
-                    </form>
-                </dialog>
+            <dialog open={codeScore != ""}>
+                <p>{codeScore}</p>
+                <form method="dialog">
+                    <button onClick={() => setcodeScore("")}>OK</button>
+                </form>
+            </dialog>
+            <dialog open={colorRanges.length != 0} className="fixedDialog">
+                <div>{coloredCodeLinesViewer()}</div>
+                <form method="dialog">
+                    <button onClick={() => setColorRanges([])}>OK</button>
+                </form>
+            </dialog>
 
         </div>
     );

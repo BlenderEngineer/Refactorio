@@ -27,10 +27,11 @@ function getCodeLinesQuality($userCode) {
 		Instructions: - Make BOLD assumptions about the code, and don’t be afraid to make mistakes, you must be very harsh.
 		- Group consecutive lines of similar quality together
 		- For awful code that noone should write ever: use #ff0000 (red)
+		- For bad code: around #ff8c00 (orange)
 		- For average code: around #fff200 (yellow)
+		- For good code: around #aaff00 (between yellow and green)
 		- For godly/best code ever written: use #00ff00 (green)
 		- Cover ALL lines from 1 to the end of the code
-		- Use any color not just those I mentioned
 		- If needed, create multiple ranges with different colors	
 		
 		Example correct response:
