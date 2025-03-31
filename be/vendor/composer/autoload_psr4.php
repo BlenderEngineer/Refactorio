@@ -17,6 +17,8 @@ return array(
     'React\\Cache\\' => array($vendorDir . '/react/cache/src'),
     'React\\Async\\' => array($vendorDir . '/react/async/src'),
     'Psr\\Http\\Message\\' => array($vendorDir . '/psr/http-message/src'),
+    'PhpParser\\' => array($vendorDir . '/nikic/php-parser/lib/PhpParser'),
     'Fig\\Http\\Message\\' => array($vendorDir . '/fig/http-message-util/src'),
     'Evenement\\' => array($vendorDir . '/evenement/evenement/src'),
+    'DeepCopy\\' => array($vendorDir . '/myclabs/deep-copy/src/DeepCopy'),
 );

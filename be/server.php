@@ -1,6 +1,7 @@
 <?php
 
 require __DIR__ . '/vendor/autoload.php';
+include __DIR__ . '/utils/prepareStringForCmd.php';
 
 use Psr\Http\Message\ServerRequestInterface;
 use React\Http\HttpServer;
@@ -41,11 +42,8 @@ function getCodeLinesQuality($userCode) {
 		
 		Here is the code to analyze:
 		$userCode";
-	$escapedPrompt = str_replace(
-        ["\n", "\"", "`", "$"],
-        ["\\n", "\\\"", "\\`", "\\$"],
-        $prompt
-    );
+	
+	$escapedPrompt = prepareStringForCmd($prompt);
 	$command = "echo \"$escapedPrompt\" | ollama run deepseek-r1";
 	echo $command;
     $output = shell_exec($command);
