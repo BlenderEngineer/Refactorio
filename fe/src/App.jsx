@@ -220,8 +220,15 @@ function App() {
                         <pre>{typeof analysisResult === 'object' ? JSON.stringify(analysisResult, null, 2) : analysisResult}</pre>
                     )}
                     </div>)}
-            
-            
+                </div>
+            </div>
+                <div className="sidebar">
+                    <h2>Extra Tools</h2>
+                    <div className="sidebar-container">
+                        <button onClick={codeScoreGenerate}>Kodo kokybės įvertinimas(0-10)</button>
+                        <button onClick={codeLinesQualityEvaluate}>Kodo eilučių kokybė</button>
+                    </div>
+                </div>
             <dialog open={codeScore != ""}>
                 <p>{codeScore}</p>
                 <form method="dialog">
@@ -234,8 +241,9 @@ function App() {
                     <button onClick={() => setColorRanges([])}>OK</button>
                 </form>
             </dialog>
-                </div>
-            </div>
+                
+                
+            
         </div>
     )
 }
