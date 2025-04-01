@@ -53,13 +53,13 @@ function getAiAnalysis($userCode, $maxAttempts = 5) {
 
         $jsonStr = extractJsonFromText($output);
         if (!$jsonStr) {
-            echo "Attempt $attempt: Failed to extract JSON. Retrying...\n";
+            echo "Attempt $attempt: Failed to extract JSON. Retrying\n";
             continue;
         }
         
         $json = json_decode($jsonStr, true);
         if (json_last_error() !== JSON_ERROR_NONE) {
-            echo "Attempt $attempt: JSON decoding error: " . json_last_error_msg() . ". Retrying...\n";
+            echo "Attempt $attempt: JSON decoding error: " . json_last_error_msg() . ". Retrying\n";
             continue;
         }
         

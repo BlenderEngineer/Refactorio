@@ -1,0 +1,1 @@
+{"version":1,"defects":[],"times":{"ExtractJsonFromTextTest::testValidJsonInText":0.01,"ExtractJsonFromTextTest::testValidJsonOnly":0,"ExtractJsonFromTextTest::testNoOpeningBrace":0.001,"ExtractJsonFromTextTest::testNoClosingBrace":0,"ExtractJsonFromTextTest::testInvalidBraceOrder":0}}
