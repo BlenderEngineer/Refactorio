@@ -7,14 +7,14 @@
 .app-container {
   width: 100%;
   margin: 0 auto;
-  padding: 20px;
+  padding: 1.25rem;
 }
 
 .input-section {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 20px;
-  margin-bottom: 20px;
+  gap: 1.25rem;
+  margin-bottom: 1.25rem;
 }
 
 .code-input {
@@ -23,7 +23,7 @@
 
 .code-input textarea {
   width: 100%;
-  padding: 10px;
+  padding: 0.625rem;
   font-family: monospace;
 }
 
@@ -38,10 +38,10 @@
 
 .file-upload label {
   display: block;
-  padding: 10px 20px;
+  padding: 0.625rem 1.25rem;
   background: #f0f0f0;
   border: 1px solid #ccc;
-  border-radius: 4px;
+  border-radius: 0.25rem;
   cursor: pointer;
 }
 
@@ -50,17 +50,17 @@
 }
 
 .action-buttons {
-  margin: 20px 0;
+  margin: 1.25rem 0;
   display: flex;
-  gap: 10px;
+  gap: 0.625rem;
 }
 
 button {
-  padding: 10px 20px;
+  padding: 0.625rem 1.25rem;
   background: #007bff;
   color: white;
   border: none;
-  border-radius: 4px;
+  border-radius: 0.25rem;
   cursor: pointer;
 }
 
@@ -70,15 +70,15 @@ button:disabled {
 }
 
 .validation-message {
-  margin: 10px 0;
+  margin: 0.625rem 0;
   color: #666;
 }
 
 .result-section {
-  margin-top: 20px;
-  padding: 20px;
+  margin-top: 1.25rem;
+  padding: 1.25rem;
   background: #f8f9fa;
-  border-radius: 4px;
+  border-radius: 0.25rem;
 }
 
 .result-section pre {
