@@ -184,6 +184,7 @@ function App() {
                         {isLoading ? 'Analyzing...' : 'Analyze Code'}
                     </button>
                 </div>
+            <div>
 
             {analysisResult && (
                 <div className="result-section">
@@ -218,9 +219,9 @@ function App() {
                     ) : (
                         <pre>{typeof analysisResult === 'object' ? JSON.stringify(analysisResult, null, 2) : analysisResult}</pre>
                     )}
-                </div>
-            </div>
-
+                    </div>)}
+            
+            
             <dialog open={codeScore != ""}>
                 <p>{codeScore}</p>
                 <form method="dialog">
@@ -233,9 +234,9 @@ function App() {
                     <button onClick={() => setColorRanges([])}>OK</button>
                 </form>
             </dialog>
-
+                </div>
+            </div>
         </div>
-    );
+    )
 }
-
 export default App;
