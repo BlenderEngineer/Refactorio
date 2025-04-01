@@ -7,7 +7,7 @@ function App() {
     const [code, setCode] = useState('');
     const [fileName, setFileName] = useState('');
     const [validationMessage, setValidationMessage] = useState('');
-    const [analysisResult, setAnalysisResult] = useState('');
+    const [analysisResult, setAnalysisResult] = useState(null);
     const [codeScore, setcodeScore] = useState('');
     const [colorRanges, setColorRanges] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
@@ -185,18 +185,39 @@ function App() {
                     </button>
                 </div>
 
-                {analysisResult && (
-                    <div className="result-section">
-                        <h2>Analysis Results</h2>
-                        <pre>{analysisResult}</pre>
-                    </div>
-                )}
-            </div>
-            <div className="sidebar">
-                <h2>Extra Tools</h2>
-                <div className="sidebar-container">
-                    <button onClick={codeScoreGenerate}>Kodo kokybės įvertinimas(0-10)</button>
-                    <button onClick={codeLinesQualityEvaluate}>Kodo eilučių kokybė</button>
+            {analysisResult && (
+                <div className="result-section">
+                    <h2>Analysis Results</h2>
+                    {typeof analysisResult === 'object' ? (
+                        <>
+                            <div>
+                                <h3>Suggestions:</h3>
+                                <ul>
+                                    {analysisResult.suggestions && analysisResult.suggestions.map((suggestion, idx) => (
+                                        <li key={idx}>
+                                            {typeof suggestion === 'object'
+                                                ? JSON.stringify(suggestion, null, 2)
+                                                : String(suggestion)}
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+                            {/* Code samples are ready, however the current AI model generates very poor examples  
+                            <div>
+                                <h3>Code Samples:</h3>
+                                {analysisResult.codeSamples && analysisResult.codeSamples.map((codeSample, idx) => (
+                                    <pre key={idx}>
+                                        {typeof codeSample === 'object'
+                                            ? JSON.stringify(codeSample, null, 2)
+                                            : String(codeSample)}
+                                    </pre>
+                                ))}
+                            </div>
+                            */}
+                        </>
+                    ) : (
+                        <pre>{typeof analysisResult === 'object' ? JSON.stringify(analysisResult, null, 2) : analysisResult}</pre>
+                    )}
                 </div>
             </div>
 
