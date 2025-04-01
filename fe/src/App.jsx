@@ -6,7 +6,7 @@ function App() {
     const [code, setCode] = useState('');
     const [fileName, setFileName] = useState('');
     const [validationMessage, setValidationMessage] = useState('');
-    const [analysisResult, setAnalysisResult] = useState('');
+    const [analysisResult, setAnalysisResult] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
 
     // Handle text input change
@@ -67,12 +67,12 @@ function App() {
 
             <div className="input-section">
                 <div className="code-input">
-          <textarea
-              value={code}
-              onChange={handleCodeChange}
-              placeholder="Paste your code here..."
-              rows={15}
-          />
+                    <textarea
+                        value={code}
+                        onChange={handleCodeChange}
+                        placeholder="Paste your code here..."
+                        rows={15}
+                    />
                 </div>
 
                 <div className="upload-section">
@@ -109,7 +109,36 @@ function App() {
             {analysisResult && (
                 <div className="result-section">
                     <h2>Analysis Results</h2>
-                    <pre>{analysisResult}</pre>
+                    {typeof analysisResult === 'object' ? (
+                        <>
+                            <div>
+                                <h3>Suggestions:</h3>
+                                <ul>
+                                    {analysisResult.suggestions && analysisResult.suggestions.map((suggestion, idx) => (
+                                        <li key={idx}>
+                                            {typeof suggestion === 'object'
+                                                ? JSON.stringify(suggestion, null, 2)
+                                                : String(suggestion)}
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+                            {/* Code samples are ready, however the current AI model generates very poor examples  
+                            <div>
+                                <h3>Code Samples:</h3>
+                                {analysisResult.codeSamples && analysisResult.codeSamples.map((codeSample, idx) => (
+                                    <pre key={idx}>
+                                        {typeof codeSample === 'object'
+                                            ? JSON.stringify(codeSample, null, 2)
+                                            : String(codeSample)}
+                                    </pre>
+                                ))}
+                            </div>
+                            */}
+                        </>
+                    ) : (
+                        <pre>{typeof analysisResult === 'object' ? JSON.stringify(analysisResult, null, 2) : analysisResult}</pre>
+                    )}
                 </div>
             )}
         </div>
