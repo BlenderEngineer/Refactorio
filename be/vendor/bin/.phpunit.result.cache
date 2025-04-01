@@ -1,0 +1,1 @@
+{"version":1,"defects":{"prepareStringForCmdTest::testAddition":7},"times":{"prepareStringForCmdTest::testAddition":0.002,"prepareStringForCmdTest::testNewLine":0.002,"prepareStringForCmdTest::testOtherCharacters":0,"prepareStringForCmdTest::testAllCharacters":0}}

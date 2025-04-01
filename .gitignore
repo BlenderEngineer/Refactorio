@@ -1402,8 +1402,7 @@ be/vendor/phpunit/phpunit/src/Metadata/UsesClassesThatImplementInterface.php
 be/vendor/phpunit/phpunit/src/Metadata/UsesFunction.php
 be/vendor/phpunit/phpunit/src/Metadata/UsesMethod.php
 be/vendor/phpunit/phpunit/src/Metadata/UsesNamespace.php
-be/vendor/phpunit/phpunit/src/Metadata/UsesTrait.php
-be/vendor/phpunit/phpunit/src/Metadata/WithoutErrorHandler.php
+be/vendor/phpunit/phpunit/src/Metadata/UsesTrait.phpbe/vendor/phpunit/phpunit/src/Metadata/WithoutErrorHandler.php
 be/vendor/phpunit/phpunit/src/Metadata/Api/CodeCoverage.php
 be/vendor/phpunit/phpunit/src/Metadata/Api/DataProvider.php
 be/vendor/phpunit/phpunit/src/Metadata/Api/Dependencies.php
@@ -1909,3 +1908,7 @@ be/vendor/composer/installed.php
 be/vendor/composer/InstalledVersions.php
 be/vendor/composer/LICENSE
 be/vendor/composer/platform_check.php
+.idea/
+
+# Ignore dist folder for frontend
+fe/dist/
