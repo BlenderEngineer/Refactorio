@@ -40,6 +40,7 @@
   display: block;
   padding: 10px 20px;
   background: #f0f0f0;
+  color:grey;
   border: 1px solid #ccc;
   border-radius: 4px;
   cursor: pointer;
@@ -78,6 +79,7 @@ button:disabled {
   margin-top: 20px;
   padding: 20px;
   background: #f8f9fa;
+  color: black;
   border-radius: 4px;
 }
 
