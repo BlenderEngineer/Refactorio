@@ -1912,3 +1912,5 @@ be/vendor/composer/platform_check.php
 
 # Ignore dist folder for frontend
 fe/dist/
+be/.phpunit.result.cache
+be/.phpunit.result.cache

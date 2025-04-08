@@ -1,7 +1,9 @@
 <?php
 
-include __DIR__ . '/../utils/prepareStringForCmd.php';
 use PHPUnit\Framework\TestCase;
+
+require_once __DIR__ . '/../server.php';
+
 
 class prepareStringForCmdTest extends TestCase
 {
