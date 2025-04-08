@@ -21,7 +21,7 @@ jobs:
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.0'
+          php-version: '8.3'
           extensions: mbstring, intl
           ini-values: post_max_size=256M, upload_max_filesize=256M
           coverage: none
@@ -49,7 +49,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '16'
+          node-version: '18'
 
       # Install dependencies and build the frontend
       - name: Install Dependencies & Build Frontend
