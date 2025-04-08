@@ -36,7 +36,7 @@ jobs:
       - name: Run PHPUnit Tests
         working-directory: be
         run: |
-          vendor/bin/phpunit
+          php vendor/bin/phpunit
 
   frontend:
     name: Frontend Build & Test
@@ -61,4 +61,4 @@ jobs:
       # Run frontend tests
       - name: Run Frontend Tests
         working-directory: fe
-        run: npm test
+        run: npx vitest run
