@@ -197,8 +197,10 @@ $http = new HttpServer(function (ServerRequestInterface $request) use ($publicDi
     }
 });
 
-$socket = new SocketServer('127.0.0.1:8080');
-$http->listen($socket);
+if (!defined('PHPUNIT_RUNNING') || PHPUNIT_RUNNING !== true) { 
+    $socket = new SocketServer('127.0.0.1:8080');
+    $http->listen($socket);
+    echo "Server running at http://127.0.0.1:8080" . "\n";
+}
 
-echo "Server running at http://127.0.0.1:8080" . "\n";
 ?>
