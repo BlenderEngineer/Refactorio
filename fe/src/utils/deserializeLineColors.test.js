@@ -26,8 +26,8 @@ describe('deserializeLineColors unit test', () => {
         expect(() => deserializeLineColors(input)).toThrow();
     });
 
-    test('handles empty input', () => {
-        expect(deserializeLineColors([])).toEqual([]);
+    test('Validate that the array of row colors is not empty', () => {
+        expect(() => deserializeLineColors([])).toThrow();
     });
 
     test('handles missing color values', () => {
@@ -37,7 +37,7 @@ describe('deserializeLineColors unit test', () => {
         expect(deserializeLineColors(input)).toEqual(expectedOutput);
     });
 
-    test('handles missing line range', () => {
+    test('Ensure that row numbers exist in the code', () => {
         const input = [',red'];
         expect(() => deserializeLineColors(input)).toThrow();
     });
