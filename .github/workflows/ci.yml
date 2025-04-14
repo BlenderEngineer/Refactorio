@@ -60,7 +60,7 @@ jobs:
       # This dependancy doesn't import, for whatever reason TODO: fix    
       - name: Install jsdom Dependency
         working-directory: fe
-        run: npm install --save-dev jsdom
+        run: npm install jsdom
               
       # Run frontend tests
       - name: Run Frontend Tests
