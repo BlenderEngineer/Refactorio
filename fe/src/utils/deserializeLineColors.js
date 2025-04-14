@@ -1,5 +1,6 @@
 export const deserializeLineColors = (rawData) => {
     if (!Array.isArray(rawData))throw new Error('Invalid input');
+    if (rawData.length === 0)throw new Error('Array of row colors can not be empty');
     return rawData.map(range => {
         if (typeof range !== 'string')throw new Error(`string expected`);
         if(range.split(',').length !== 2)throw new Error(`Invalid format`);
