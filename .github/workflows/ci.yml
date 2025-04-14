@@ -57,7 +57,11 @@ jobs:
         run: |
           npm ci
           npm run build
-
+      # This dependancy doesn't import, for whatever reason TODO: fix    
+      - name: Install jsdom Dependency
+        working-directory: fe
+        run: npm install --save-dev jsdom
+              
       # Run frontend tests
       - name: Run Frontend Tests
         working-directory: fe
