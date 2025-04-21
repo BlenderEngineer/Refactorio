@@ -203,7 +203,7 @@ function App() {
                                     ))}
                                 </ul>
                             </div>
-                            {/* Code samples are ready, however the current AI model generates very poor examples  
+                            {
                             <div>
                                 <h3>Code Samples:</h3>
                                 {analysisResult.codeSamples && analysisResult.codeSamples.map((codeSample, idx) => (
@@ -214,7 +214,7 @@ function App() {
                                     </pre>
                                 ))}
                             </div>
-                            */}
+                            }
                         </>
                     ) : (
                         <pre>{typeof analysisResult === 'object' ? JSON.stringify(analysisResult, null, 2) : analysisResult}</pre>
