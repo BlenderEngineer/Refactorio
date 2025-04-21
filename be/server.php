@@ -34,7 +34,7 @@ function getAiAnalysis($userCode, $maxAttempts = 5) {
         $prompt = "Please analyze the following code for improvements in readability, maintainability, and performance. " .
                   "Return your response as a JSON object with exactly two keys: 'suggestions' and 'codeSamples'. " .
                   "The 'suggestions' key should be an array of textual bullet-point recommendations (each item a single string). " .
-                  "The 'codeSamples' key should be an array of code snippets corresponding to some or all of the suggestions (if applicable). " .
+                  "The 'codeSamples' key should be an array of code lines, adding up to the full code after applying all of the suggestions (if applicable). " .
                   "Do not include any extra text, markdown, or commentary outside of the JSON object. " .
                   "Here is the code to analyze:\n";
         
